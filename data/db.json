@@ -1,0 +1,19 @@
+{
+    "solutions": [
+        {"word": "vadar", "id": 1},
+        {"id": 2, "word": "spire"},
+        {"id": 3, "word": "flair"},
+        {"id": 4, "word": "plumb"},
+        {"id": 5, "word": "climb"},
+        {"id": 6, "word": "blank"},
+        {"id": 7, "word": "blind"},
+        {"id": 8, "word": "dread"},
+        {"id": 9, "word": "clear"},
+        {"id": 10, "word": "risky"},
+        {"id": 11, "word": "pesky"},
+        {"id": 12, "word": "sword"},
+        {"id": 13, "word": "spear"},
+        {"id": 14, "word": "bling"},
+        {"id": 15, "word": "fiery"}
+    ]
+}
