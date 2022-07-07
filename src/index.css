@@ -35,16 +35,14 @@ h1 {
   animation: flip 0.5s ease forwards;
 }
 .row > div.red {
-  --background: red;
-  --border-color: red;
-  animation: flip 0.5s ease forwards;
-
+  --background: #a1a1a1;
+  --border-color: #a1a1a1;
+  animation: flip 0.6s ease forwards;
 }
 .row > div.yellow {
   --background: #e2cc68;
   --border-color: #e2cc68;
   animation: flip 0.5s ease forwards;
-
 }
 .row > div:nth-child(2) {
   animation-delay: 0.2s;
@@ -61,7 +59,6 @@ h1 {
 .row.current > div.filled {
   animation: bounce 0.2s ease-in-out forwards;
 }
-
 .keypad {
   max-width: 500px;
   margin: 20px auto;
@@ -75,43 +72,56 @@ h1 {
   border-radius: 6px;
   line-height: 50px;
 }
+.keypad > div.green {
+  background: #5ac85a;
+  color: #fff;
+  transition: all 0.3s ease-in;
+}
+.keypad > div.yellow {
+  background: #e2cc68;
+  color: #fff;
+  transition: all 0.3s ease-in;
+}
+.keypad > div.red {
+  background: #a1a1a1;
+  color: #fff;
+  transition: all 0.3s ease-in;
+}
 
-/* animations */
+/* keyframe animations */
 @keyframes flip {
   0% {
     transform: rotateX(0);
     background: #fff;
     border-color: #333;
   }
-  45%{
+  45% {
     transform: rotateX(90deg);
-    background: #fff;
+    background: white;
     border-color: #333;
-
   }
-  55%{
+  55% {
     transform: rotateX(90deg);
     background: var(--background);
     border-color: var(--border-color);
-    color: #eee
   }
-  100%{
-    transform: rotateX(0);
-    background: var(--background);;
+  100% {
+    transform: rotateX(0deg);
+    background: var(--background);
     border-color: var(--border-color);
-    color: #eee
+    color: #eee;
   }
 }
 
 @keyframes bounce {
-  0% {
+  0% { 
     transform: scale(1);
     border-color: #ddd;
   }
-  50%{
+  50% { 
     transform: scale(1.2);
   }
-  100%{
+  100% {
     transform: scale(1);
     border-color: #333;
   }
