@@ -34,7 +34,7 @@ h1 {
   --border-color: #5ac85a;
   animation: flip 0.5s ease forwards;
 }
-.row > div.grey {
+.row > div.red {
   --background: #a1a1a1;
   --border-color: #a1a1a1;
   animation: flip 0.6s ease forwards;
@@ -82,7 +82,7 @@ h1 {
   color: #fff;
   transition: all 0.3s ease-in;
 }
-.keypad > div.grey {
+.keypad > div.red {
   background: #a1a1a1;
   color: #fff;
   transition: all 0.3s ease-in;
