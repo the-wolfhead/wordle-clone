@@ -1,4 +1,4 @@
-    {
+     {
         "letters": [
           {"key": "a"},
           {"key": "b"},
@@ -27,7 +27,7 @@
           {"key": "y"},
           {"key": "z"}
         ],
-
+,
     "solutions": [
         {"word": "vadar", "id": 1},
         {"id": 2, "word": "spire"},
@@ -44,5 +44,23 @@
         {"id": 13, "word": "spear"},
         {"id": 14, "word": "bling"},
         {"id": 15, "word": "fiery"}
+    ],
+
+    "solutions2": [
+        {"word": "vendor", "id": 1},
+        {"word": "hinder", "id": 2},
+        {"word": "vapour", "id": 3},
+        {"word": "bangle", "id": 4},
+        {"word": "buggle", "id": 5},
+        {"word": "gingle", "id": 6},
+        {"word": "salted", "id": 7},
+        {"word": "safari", "id": 8},
+        {"word": "plunge", "id": 9},
+        {"word": "plague", "id": 10},
+        {"word": "humour", "id": 11},
+        {"word": "simple", "id": 12},
+        {"word": "flimsy", "id": 13},
+        {"word": "hunger", "id": 14},
+        {"word": "rugged", "id": 15}
     ]
 }
