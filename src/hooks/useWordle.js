@@ -89,5 +89,3 @@ const useWordle = (solution) => {
 
 export default useWordle;
 
-
-export default useWordle;
