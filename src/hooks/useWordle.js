@@ -11,17 +11,19 @@ const useWordle = (solution) => {
   const formatGuess = () => {
     const solutionArray = [...solution];
     const formattedGuess = [...currentGuess].map((letter, index) => {
-      const color =
-        solutionArray[index] === letter
-          ? 'green' // Correct letter in correct position
-          : solutionArray.includes(letter)
-          ? 'red' // Correct letter in wrong position
-          : 'yellow'; // Incorrect letter
+      const correctPosition = solutionArray[index] === letter;
+      const correctLetter = solutionArray.includes(letter);
 
       // Mark the letter as used
       solutionArray[index] = null;
 
-      return { key: letter, color };
+      if (correctPosition) {
+        return { key: letter, color: 'green' };
+      } else if (correctLetter) {
+        return { key: letter, color: 'red' };
+      } else {
+        return { key: letter, color: 'yellow' };
+      }
     });
 
     return formattedGuess;
@@ -88,4 +90,5 @@ const useWordle = (solution) => {
 };
 
 export default useWordle;
+
 
