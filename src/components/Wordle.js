@@ -1,38 +1,25 @@
-import { useEffect, useState } from 'react';
-import useWordle from '../hooks/useWordle';
-import Grid from './Grid';
-import Keypad from './Keypad';
-import Modal from './Modal';
+import React from 'react';
 
-export default function Wordle({ solution }) {
-  const { currentGuess, handleInputChange, handleEnterPress, guesses, isCorrect, usedKeys, turn } = useWordle(solution);
-  const [showModal, setShowModal] = useState(false);
-
-  useEffect(() => {
-    if (isCorrect || turn > 5) {
-      setTimeout(() => setShowModal(true), 2000);
-    }
-  }, [isCorrect, turn]);
-
+const Modal = ({ isCorrect, turn, solution, onTryAgain }) => {
   return (
-    <div>
-      <div>
-        <div>Current Guess - {currentGuess}</div>
-        <input
-          type="text"
-          value={currentGuess}
-          maxLength={5}
-          onChange={handleInputChange}
-          onKeyPress={(e) => {
-            if (e.key === 'Enter') {
-              handleEnterPress();
-            }
-          }}
-        />
-      </div>
-      <Grid currentGuess={currentGuess} guesses={guesses} turn={turn} />
-      <Keypad usedKeys={usedKeys} />
-      {showModal && <Modal isCorrect={isCorrect} turn={turn} solution={solution} />}
+    <div className="modal">
+      {isCorrect ? (
+        <div>
+          <h1>You Win</h1>
+          <p className="solution">{solution}</p>
+          <p>You found the solution in {turn} guesses :)</p>
+        </div>
+      ) : (
+        <div>
+          <h1>Nevermind!</h1>
+          <p className="solution">{solution}</p>
+          <p>Better luck next time :)</p>
+          <button onClick={onTryAgain}>Try Again</button>
+        </div>
+      )}
     </div>
   );
-}
+};
+
+export default Modal;
+
