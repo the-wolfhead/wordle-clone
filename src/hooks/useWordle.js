@@ -9,23 +9,19 @@ const useWordle = (solution) => {
   const [usedKeys, setUsedKeys] = useState({});
 
   const formatGuess = () => {
-    let solutionArray = [...solution];
-    let formattedGuess = [...currentGuess].map((l) => {
-      return { key: l, color: 'red' };
-    });
+    const solutionArray = [...solution];
+    const formattedGuess = [...currentGuess].map((letter, index) => {
+      const color =
+        solutionArray[index] === letter
+          ? 'green' // Correct letter in correct position
+          : solutionArray.includes(letter)
+          ? 'red' // Correct letter in wrong position
+          : 'yellow'; // Incorrect letter
 
-    formattedGuess.forEach((l, i) => {
-      if (solution[i] === l.key) {
-        formattedGuess[i].color = 'green';
-        solutionArray[i] = null;
-      }
-    });
+      // Mark the letter as used
+      solutionArray[index] = null;
 
-    formattedGuess.forEach((l, i) => {
-      if (solutionArray.includes(l.key) && l.color !== 'green') {
-        formattedGuess[i].color = 'yellow';
-        solutionArray[solutionArray.indexOf(l.key)] = null;
-      }
+      return { key: letter, color };
     });
 
     return formattedGuess;
@@ -35,39 +31,32 @@ const useWordle = (solution) => {
     if (currentGuess === solution) {
       setIsCorrect(true);
     }
+
     setGuesses((prevGuesses) => {
-      let newGuesses = [...prevGuesses];
+      const newGuesses = [...prevGuesses];
       newGuesses[turn] = formattedGuess;
       return newGuesses;
     });
-    setHistory((prevHistory) => {
-      return [...prevHistory, currentGuess];
-    });
-    setTurn((prevTurn) => {
-      return prevTurn + 1;
-    });
+
+    setHistory((prevHistory) => [...prevHistory, currentGuess]);
+    setTurn((prevTurn) => prevTurn + 1);
+
     setUsedKeys((prevUsedKeys) => {
-      let newKeys = { ...prevUsedKeys };
+      const newKeys = { ...prevUsedKeys };
 
-      formattedGuess.forEach((l) => {
-        const currentColor = newKeys[l.key];
-
-        if (l.color === 'green') {
-          newKeys[l.key] = 'green';
-          return;
-        }
-        if (l.color === 'yellow' && currentColor !== 'green') {
-          newKeys[l.key] = 'yellow';
-          return;
-        }
-        if (l.color === 'red' && currentColor !== 'green' && currentColor !== 'yellow') {
-          newKeys[l.key] = 'red';
-          return;
+      formattedGuess.forEach(({ key, color }) => {
+        if (color === 'green' && !newKeys[key]) {
+          newKeys[key] = 'green';
+        } else if (color === 'yellow' && (!newKeys[key] || newKeys[key] === 'red')) {
+          newKeys[key] = 'yellow';
+        } else if (color === 'red' && !newKeys[key]) {
+          newKeys[key] = 'red';
         }
       });
 
       return newKeys;
     });
+
     setCurrentGuess('');
   };
 
@@ -97,5 +86,8 @@ const useWordle = (solution) => {
 
   return { turn, currentGuess, guesses, usedKeys, isCorrect, handleInputChange, handleEnterPress };
 };
+
+export default useWordle;
+
 
 export default useWordle;
