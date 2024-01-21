@@ -5,7 +5,7 @@ function App() {
   const[solution, setSolution] = useState(null)
 
   useEffect(() => {
-    fetch('https://wordbattlesdb.herokuapp.com/solutions')
+    fetch('https://jsonserver-fqwl.onrender.com/solutions')
       .then(res => res.json())
       .then(json => {
         //random int between 0 & 14
