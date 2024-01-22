@@ -62,8 +62,17 @@ const useWordle = (solution) => {
     setCurrentGuess('');
   };
 
+  const resetGame = () => {
+    setTurn(0);
+    setCurrentGuess('');
+    setGuesses([...Array(6)]);
+    setHistory([]);
+    setIsCorrect(false);
+    setUsedKeys({});
+  };
+
   const handleInputChange = (event) => {
-    setCurrentGuess(event.target.value.toUpperCase()); // Convert to uppercase for consistency
+    setCurrentGuess(event.target.value.toUpperCase());
   };
 
   const handleEnterPress = () => {
@@ -86,7 +95,22 @@ const useWordle = (solution) => {
     addNewGuess(formatted);
   };
 
-  return { turn, currentGuess, guesses, usedKeys, isCorrect, handleInputChange, handleEnterPress };
+  const handleKeyup = ({ key }) => {
+    if (key === 'Enter') {
+      handleEnterPress();
+    }
+    if (key === 'Backspace') {
+      setCurrentGuess((prev) => prev.slice(0, -1));
+      return;
+    }
+    if (/^[A-Za-z]$/.test(key)) {
+      if (currentGuess.length < 5) {
+        setCurrentGuess((prev) => prev + key.toUpperCase());
+      }
+    }
+  };
+
+  return { turn, currentGuess, guesses, usedKeys, isCorrect, handleInputChange, handleEnterPress, resetGame, handleKeyup };
 };
 
 export default useWordle;
