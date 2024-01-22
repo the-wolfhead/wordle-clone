@@ -75,45 +75,30 @@ const useWordle = (solution) => {
     setCurrentGuess(event.target.value.toUpperCase());
   };
 
-  const handleEnterPress = () => {
-    if (turn > 5) {
-      console.log('you used all your guesses!');
-      return;
-    }
-
-    if (history.includes(currentGuess)) {
-      console.log('you already tried that word.');
-      return;
-    }
-
-    if (currentGuess.length !== 5) {
-      console.log('word must be 5 chars.');
-      return;
-    }
-
-    const formatted = formatGuess();
-    addNewGuess(formatted);
-  };
-
-  const handleKeyup = ({ key }) => {
-    if (key === 'Enter') {
-      handleEnterPress();
-    }
-    if (key === 'Backspace') {
-      setCurrentGuess((prev) => prev.slice(0, -1));
-      return;
-    }
-    if (/^[A-Za-z]$/.test(key)) {
-      if (currentGuess.length < 5) {
-        setCurrentGuess((prev) => prev + key.toUpperCase());
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      if (turn > 5) {
+        console.log('you used all your guesses!');
+        return;
       }
+
+      if (history.includes(currentGuess)) {
+        console.log('you already tried that word.');
+        return;
+      }
+
+      if (currentGuess.length !== 5) {
+        console.log('word must be 5 chars.');
+        return;
+      }
+
+      const formatted = formatGuess();
+      addNewGuess(formatted);
     }
   };
 
-  return { turn, currentGuess, guesses, usedKeys, isCorrect, handleInputChange, handleEnterPress, resetGame, handleKeyup };
+  return { turn, currentGuess, guesses, usedKeys, isCorrect, handleInputChange, handleKeyDown, resetGame };
 };
 
 export default useWordle;
-
-
-
